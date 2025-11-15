@@ -13,14 +13,19 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Request logging
+// Path rewriting middleware - strip /api/notes prefix
 app.use((req, res, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  // Vercel passes full path, but router expects relative paths
+  // /api/notes -> /
+  // /api/notes/123 -> /123
+  if (req.url.startsWith('/api/notes')) {
+    req.url = req.url.replace('/api/notes', '') || '/';
+  }
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url} (original: ${req.originalUrl || req.url})`);
   next();
 });
 
-// API Routes - Vercel will route /api/notes/* to this function
-// The path will be relative (e.g., /api/notes/123 becomes /123 in Express)
+// API Routes - Mount router at root since we've rewritten the path
 app.use('/', notesRouter);
 
 // Error handling middleware
