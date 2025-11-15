@@ -1,0 +1,25 @@
+{
+  "name": "smart-notes-backend",
+  "version": "1.0.0",
+  "description": "Node.js backend for SMARTNOTES app",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "init-db": "node src/database/init.js"
+  },
+  "keywords": ["notes", "api", "sqlite"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "sql.js": "^1.10.3",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0"
+  }
+}
+

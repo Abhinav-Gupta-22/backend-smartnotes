@@ -1,0 +1,8 @@
+node_modules/
+.env
+.env.local
+.vercel
+database/
+*.db
+*.db-journal
+.DS_Store
